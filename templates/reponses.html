@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace | Formulaire</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/remplir.css') }}">
+    <script src="{{ url_for('.static', filename='./scripts/reponses.js') }}" defer></script>
+</head>
+<body>
+<div class="header">
+    <img id="logo" src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <div class="Title">
+        <h2 class="monEspace">({{ g.user[1] }}) Mon Espace</h2>
+        <h2 class="monEspace" id="subTitle">/ Reponses Forms</h2>
+    </div>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./images/icons/sortie.svg') }}"
+                                           alt="déconnexion"></button>
+</div>
+
+<form class="form">
+    <div id="blur"></div>
+    <div id="greenHead"></div>
+    <div id="formContent">
+        <div class="formTitle">
+            <img src="{{ url_for('.static', filename='./images/icons/input.svg') }}" alt="image">
+            <h2>{{ form["nom"] }}</h2>
+        </div>
+        <p class="lorem">{{ form["description"] }}</p>
+        <div class="questions">
+            {% for reponse in form["reponses"] %}
+                <div class="text" style="margin-bottom: 5%">
+                    <div class="qTop">
+                        <p class="qNum"><b>{{ loop.index }}</b>/{{ form["reponses"]|length }}</p>
+                        <h5 class="qTitle">{{ reponse["label"] }}</h5>
+                    </div>
+                    {% if reponse["question"]["type"] == "text" %}
+
+                        <div class="input-container">
+                            <input readonly type="text" maxlength="200" value="{{ reponse["reponse"] }}">
+                        </div>
+
+                    {% elif reponse["question"]["type"] == "long" %}
+
+                        <div class="input-container">
+                            <textarea readonly maxlength="4000">{{ reponse["reponse"] }}</textarea>
+                            <p>4000 caractères max.</p>
+                        </div>
+
+                    {% else %}
+
+                        <input readonly type="range" max="10" value="{{ reponse["reponse"] }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="rslt">
+            <label>Résultats de :</label>
+            <select class="employe" id="dropdown" onchange="changeFenetre({{ current_form }});">
+                {% for user in users %}
+                    {% if user["id"] == current_user %}
+                        <option selected value="{{ user["id"] }}">{{ user["name"] }}</option>
+                    {% else %}
+                        <option value="{{ user["id"] }}">{{ user["name"] }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

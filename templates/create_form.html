@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace | Créer un formulaire</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/create_form.css') }}">
+</head>
+<body>
+<div class="header">
+    <img id="logo" src="{{ url_for('.static', filename='./logo/logo.svg') }}" alt="Logo">
+    <div class="Title">
+        <h2 class="monEspace">Mon Espace</h2>
+        <h2 class="monEspace" id="subTitle">/ Créer un form</h2>
+    </div>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./icons/sortie.svg') }}" alt="déconnexion"></button>
+</div>
+<form class="form" method="post" action="/create_form">
+    <div id="greenHead"></div>
+    <div id="formContent">
+        <div class="formTitle">
+            <img src="{{ url_for('.static', filename='./icons/input.svg') }}" alt="image">
+            <div class="input-container">
+                <input name="form_name" id="form_name" type="text" maxlength="50" placeholder="Entrez votre titre ici">
+                <p>50 caractères max.</p>
+            </div>
+        </div>
+        <div class="input-container" id="description">
+            <textarea name="form_description" id="form_description" maxlength="200" placeholder="Entrez la description du formulaire ici"></textarea>
+            <p>200 caractères max.</p>
+        </div>
+        <div class="question">
+            <div class="input-container">
+                <input name="label-1" id="label-1" type="text" maxlength="80" placeholder="Entrez la question ici">
+                <p>80 caractères max.</p>
+            </div>
+            <select name="type-1" id="type-1" class="questionType">
+                <option value="text">Text</option>
+                <option value="long">Long</option>
+                <option value="range">Range</option>
+            </select>
+        </div>
+        <div class="boutonChiant"><button class="remplir" type="button">Ajouter une question</button></div>
+
+        <div class="boutonChiant"><button type="submit">Creer le formulaire</button></div>
+    </div>
+</form>
+<script>
+    const form = document.querySelector('.form');
+const remplirButton = document.querySelector('.remplir');
+const formContent = document.getElementById('formContent');
+let count=2;
+
+const addQuestion = () => {
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+
+    questionDiv.innerHTML = `
+    <div style="margin-top: 30px; width: 100%">
+        <div class="input-container">
+          <input name="label-`+count+`" id="label-`+count+`" type="text" maxlength="80" placeholder="Entrez la question ici">
+          <p>80 caractères max.</p>
+        </div>
+        <select name="type-`+count+`" id="type-`+count+`" class="questionType">
+          <option value="text">Text</option>
+          <option value="long">Long</option>
+          <option value="range">Range</option>
+        </select>
+    </div>
+
+  `;
+
+    count++;
+
+    formContent.insertBefore(questionDiv, remplirButton.parentNode);
+};
+
+remplirButton.addEventListener('click', addQuestion);</script>
+</body>
+</html>

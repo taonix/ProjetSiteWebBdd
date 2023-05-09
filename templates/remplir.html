@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace | Formulaire</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/remplir.css') }}">
+</head>
+<body>
+<div class="header">
+    <img id="logo" src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <div class="Title">
+        <h2 class="monEspace">({{ g.user[1] }})Mon Espace</h2>
+        <h2 class="monEspace" id="subTitle">/ Completion Forms</h2>
+    </div>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./images/icons/sortie.svg') }}"
+                                           alt="déconnexion"></button>
+</div>
+
+<form class="form" method="post" action="/remplir/{{ form["id"] }}">
+    <div id="blur"></div>
+    <div id="greenHead"></div>
+    <div id="formContent">
+        <div class="formTitle">
+            <img src="{{ url_for('.static', filename='./images/icons/input.svg') }}" alt="image">
+            <h2>{{ form["nom"] }}</h2>
+        </div>
+        <p class="lorem">{{ form["description"] }}</p>
+        <div class="questions">
+            {% for question in form["questions"] %}
+                <div class="text" style="margin-bottom: 5%">
+                    <div class="qTop">
+                        <p class="qNum"><b>{{ loop.index }}</b>/{{ form["questions"]|length }}</p>
+                        <h5 class="qTitle">{{ question["label"] }}</h5>
+                    </div>
+                    {% if question["type"] == "text" %}
+
+                        <div class="input-container">
+                            <input type="text" maxlength="200" placeholder="Entrez votre réponse ici" name="{{ question["id"] }}" id="{{ question["id"] }}">
+                            <p>200 caractères max.</p>
+                        </div>
+
+                    {% elif question["type"] == "long" %}
+
+                        <div class="input-container">
+                            <textarea maxlength="4000" placeholder="Entrez votre réponse ici"  name="{{ question["id"] }}" id="{{ question["id"] }}"></textarea>
+                            <p>4000 caractères max.</p>
+                        </div>
+
+                    {% else %}
+
+                        <input type="range" max="10" placeholder="Entrez votre réponse ici"  name="{{ question["id"] }}" id="{{ question["id"] }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="boutonChiant">
+            <button class="remplir" type="submit">Envoyer la réponse au questionnaire</button>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

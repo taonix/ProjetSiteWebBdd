@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='./styles/login.css') }}">
+    <script src="{{ url_for('.static', filename='./scripts/app.js') }}" defer></script>
+</head>
+<body>
+    <img src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <div class="rectangleFlou"></div>
+    <section class="form">
+        <p id="connexion">Connexion</p>
+        <p id="identifiant">Identifiant</p>
+        <p id="mdp">Mot de passe</p>
+        <form method="POST">
+            <label class="email">
+                <input type="text" placeholder="jesuisjeanphillipeboucher@jeanmi.org" name="username">
+            </label>
+
+            <label class="mdp">
+                <input type="password" placeholder="1234" name="password" id="psw">
+                <button id="eye" type="button" onclick="myFunction()">
+                    <img src="{{ url_for('.static', filename='./images/icons/eye.svg') }}">
+                </button>
+            </label>
+
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("psw");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                }
+            </script>
+
+            <button id="submit" type="submit">Acceder à mon espace</button>
+        </form>
+    </section>
+</body>
+</html>

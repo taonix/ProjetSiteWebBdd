@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaires Remplis</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/questionnairesRemplis.css') }}">
+    <script src="{{ url_for('.static', filename='./scripts/app.js') }}" defer></script>
+</head>
+<body>
+
+<div class="header-bar">
+    <img id="logo" src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <div class="Title">
+        <h2 class="monEspace">({{ g.user[1] }}) Mon Espace </h2>
+        <h2 class="monEspace" id="subTitle"> / Questionnaires Remplis</h2>
+    </div>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./images/icons/sortie.svg') }}" alt="déconnexion"></button>
+</div>
+
+<div id="questionnaires_remplis">
+    <img src="{{ url_for('.static', filename='./images/icons/send-check.svg') }}" alt="send-check" class="iconText">
+    Questionnaires remplis
+</div>
+
+<div class="card-list">
+
+    {% for form in completed_forms %}
+        <div class="card">
+            <div id="q_border_green"></div>
+            <div id="q_content">
+                <div>
+                    <p id="q_title"> {{ form["nom"] }} </p>
+                    <p id="q_subtitle"> {{ form["description"] }} </p>
+                </div>
+                <div class="q_infos">
+                    <div class="text">
+                        <img src="{{ url_for('.static', filename='./images/icons/ui-checks-grid.svg') }}"
+                             alt="check-grid" class="iconTextSmall">
+                        <p class="questions"> {{ form["questions"]|length }} Questions</p>
+                    </div>
+                    <div class="text">
+                        <img src="{{ url_for('.static', filename='./images/icons/stopwatch.svg') }}" alt="stopwatch"
+                             class="iconTextSmall">
+                        <p class="minutes">{{ form["questions"]|length*5 }} minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaires Remplis</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/accounts.css') }}">
+    <script src="{{ url_for('.static', filename='./scripts/app.js') }}" defer></script>
+</head>
+<body>
+
+<div class="header-bar">
+    <img id="logo" src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <div class="Title">
+        <h2 class="monEspace">({{ g.user[1] }}) Mon Espace admin </h2>
+        <h2 class="monEspace" id="subTitle"> / Gestion de comptes</h2>
+    </div>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./images/icons/sortie.svg') }}" alt="déconnexion"></button>
+</div>
+
+<div id="questionnaires_remplis">
+    <img src="{{ url_for('.static', filename='./images/icons/card-list.svg') }}" alt="card-list" class="iconText">
+    Liste des comptes
+</div>
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Nom</td>
+        <td>Mot de passe</td>
+        <td>Token</td>
+        <td>Statut</td>
+    </tr>
+    {% for account in accounts %}
+        <tr>
+            <td><p>{{ account["id"] }}</p></td>
+            <td><p>{{ account["username"] }}</p></td>
+            <td><p>{{ account["password"] }}</p></td>
+            <td><p>{{ account["token"] }}</p></td>
+            {% if account["admin"] %}
+                <td><p>Administrateur</p></td>
+            {% else %}
+                <td><p>Employée</p></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

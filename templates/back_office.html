@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace Admin</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='./styles/back_office.css') }}">
+    <script src="{{ url_for('.static', filename='./scripts/back_office.js') }}" defer></script>
+    <script src="{{ url_for('.static', filename='./scripts/app.js') }}" defer></script>
+</head>
+<body>
+
+<div class="header-bar">
+    <img id="logo" src="{{ url_for('.static', filename='./images/logo/logo.svg') }}" alt="Logo">
+    <h2 class="monEspace">({{ g.user[1] }}) Mon Espace Admin</h2>
+    <button type="button" id="sortie"><img src="{{ url_for('.static', filename='./images/icons/sortie.svg') }}"
+                                           alt="déconnexion"></button>
+</div>
+
+
+<div id="actionsRapides">
+    <img src="{{ url_for('.static', filename='./images/icons/lightning.svg') }}" alt="lightning" class="iconText">
+    Actions rapides
+</div>
+
+<div id="questionnaireRempli" class="container" style="margin-right: 5%">
+    <img id="questionnaireRempliIMG" class="box" src="{{ url_for('.static', filename='./images/icons/file-plus.svg') }}"
+         alt="ui-checks">
+    <h3 id="questionnaireRempliP" class="box">Creer un nouveau questionnaire</h3>
+</div>
+
+<div id="Gererlescomptes" class="container">
+    <img id="questionnaireRempliIMG" class="box" src="{{ url_for('.static', filename='./images/icons/person-gear.svg') }}"
+         alt="ui-checks">
+    <h3 id="questionnaireRempliP" class="box">Gerer les comptes</h3>
+</div>
+
+<div id="nouveauxQuestionnaires">
+    <img src="{{ url_for('.static', filename='./images/icons/input.svg') }}" alt="input-cursor-icon" class="iconText">
+    Questionnaires existants
+</div>
+
+<div class="card-list">
+
+    {% for form in forms %}
+        <div class="card">
+            <div id="q_border_green"></div>
+            <div id="q_content">
+                <div>
+                    <p id="q_title"> {{ form["nom"] }} </p>
+                    <p id="q_subtitle"> {{ form["description"] }} </p>
+                </div>
+                <div class="q_infos">
+                    <div class="text">
+                        <img src="{{ url_for('.static', filename='./images/icons/ui-checks-grid.svg') }}"
+                             alt="check-grid" class="iconTextSmall">
+                        <p class="questions"> {{ form["questions"]|length }} Questions</p>
+                    </div>
+                    <div class="text">
+                        <img src="{{ url_for('.static', filename='./images/icons/stopwatch.svg') }}" alt="stopwatch"
+                             class="iconTextSmall">
+                        <p class="minutes">{{ form["questions"]|length*5 }} minutes</p>
+                    </div>
+                </div>
+                <div class="boutonChiant">
+                    <button class="remplir" type="button" onclick="rslt({{ form["id"] }})">Voir les résultat</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

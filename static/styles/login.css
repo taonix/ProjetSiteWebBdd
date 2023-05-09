@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;700&display=swap');
+
+:root {
+    --main-bg-color: #030F00
+}
+
+body {
+    margin: 2%;
+    background-color: var(--main-bg-color);
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.rectangleFlou {
+    position: absolute;
+    z-index: -1;
+
+    left: 30%;
+    bottom: 35%;
+
+    height: 30%;
+    width: 40%;
+
+    background-color: rgba(83, 255, 100, 0.1);
+    filter: blur(300px);
+}
+
+.form {
+
+    position: absolute;
+    z-index: 1;
+
+    bottom: 25%;
+    left: 20%;
+
+    height: 50%;
+    width: 60%;
+
+    border-radius: 20px;
+
+    background-color: rgba(12, 14, 12, 0.7);
+}
+
+.email {
+    position: absolute;
+    width: 90%;
+    height: 8%;
+
+    bottom: 60%;
+    left: 5%;
+
+    font-family: 'Outfit', sans-serif;
+    font-weight: 200;
+}
+
+.mdp {
+    position: absolute;
+    width: 90%;
+    height: 8%;
+
+    bottom: 25%;
+    left: 5%;
+
+    font-family: 'Outfit', sans-serif;
+    font-weight: 200;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(2, 3, 2, 0.23);
+    border: none;
+    font-family: 'Outfit', sans-serif;
+    color: #FEFEFE;
+}
+
+#submit {
+    position: absolute;
+
+    bottom: 8%;
+    left: 35%;
+
+    height: 10%;
+    width: 30%;
+
+    background: linear-gradient(90.52deg, #009B0F -5.89%, #00730B 111.23%);
+    border-radius: 4px;
+    border: none;
+
+    color: #FEFEFE;
+    font-weight: 400;
+    font-family: 'Outfit', sans-serif;
+    font-size: 100%;
+}
+
+#sortie {
+    transition: color 0.2s;
+}
+
+#sortie:hover {
+    cursor: pointer;
+    color: #009B0F;
+}
+
+#connexion {
+    width: 100%;
+
+    color: #FEFEFE;
+    font-weight: 500;
+    font-size: large;
+
+    text-align: center;
+}
+
+#identifiant {
+    position: absolute;
+    width: 100%;
+
+    color: #FEFEFE;
+    font-size: 100%;
+
+    left: 5%;
+    bottom: 65%;
+}
+
+#mdp {
+    position: absolute;
+    width: 100%;
+
+    color: #FEFEFE;
+    font-size: 100%;
+
+    left: 5%;
+    bottom: 30%;
+}
+
+#eye {
+    position: absolute;
+    left: 93%;
+    bottom: 70%;
+
+    width: 10%;
+    height: 10%;
+
+    background-color: transparent;
+    border: none;
+}
+
+.form {
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
+    margin: 10px;
+    padding: 10px;
+    z-index: 1;
+    transition: box-shadow 0.5s;
+}
+
+.from:hover {
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.25);
+    z-index: 2;
+}
+
+
+@media screen and (max-width: 1000px) {
+    body, input::placeholder {
+        font-size: 0.5em !important;
+    }
+
+    .form {
+
+        bottom: 35%;
+        left: 20%;
+
+        height: 30%;
+        width: 60%;
+    }
+}
